@@ -6,10 +6,6 @@ var profile = require('./controllers/profile')
 var tempplace = require('./controllers/temporaryPlace')
 //
 module.exports = function (app, passport) {
-  app.post('/teste', function (req, res) {
-    console.log(req.body)
-    res.redirect('/dashboard')
-  })
   // =====================================
   // Dashboard ===========================
   // =====================================
@@ -32,7 +28,7 @@ module.exports = function (app, passport) {
   // =====================================
   //
   app.get('/tempplaces/orgs/:id', isLoggedIn, tempplace.index)
-  // app.get('/tempplaces/:id', isLoggedIn, tempplace.show)
+  app.get('/tempplaces/:id', isLoggedIn, tempplace.show)
   // 
   // =====================================
   // Org =================================

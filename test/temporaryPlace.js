@@ -127,7 +127,6 @@ describe('TemporaryPlace', () => {
           .get('/tempplaces/' + tempplace_id)
           .then((res) => {
             res.should.have.status(200)
-            console.log(res.body)
             done()
           })
           .catch((err) => {

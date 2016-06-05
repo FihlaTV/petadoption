@@ -11,18 +11,17 @@ var TemporaryPlaceController = {
         console.log(err)
         res.render('error', { error: err })
       })
-  }
-// ,
-// show: function(req, res) {
-//   User.findById(req.params.id).execAsync()
-//   .then(function(user) {
-//     res.render('profile/show', { user: user })
-//   })
-//   .catch(function(err){
-//     console.log('error:', err)
-//     return err
-//   })
-// },
+  },
+  show: function (req, res) {
+    TemporaryPlace.findById(req.params.id).execAsync()
+      .then(function (tempPlace) {
+        res.render('temporaryPlace/show', { userActive: req.user, tempPlace: tempPlace })
+      })
+      .catch(function (err) {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  },
 // create: function(req, res) {
 //   User.findById(req.user._id).execAsync()
 //   .then(function(user) {
