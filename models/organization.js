@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
-var Schema       = mongoose.Schema;
+var Schema = mongoose.Schema
 
 var organizationSchema = new Schema({
   name: {type: String, trim: true, required: false},
@@ -18,6 +18,6 @@ var organizationSchema = new Schema({
   // }],
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
-});
+})
 
-module.exports = mongoose.model('Organization', organizationSchema);
+module.exports = mongoose.model('Organization', organizationSchema)

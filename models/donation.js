@@ -1,5 +1,5 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 var donationSchema = new Schema({
   name: {type: String, trim: true, required: false},
@@ -18,19 +18,19 @@ var donationSchema = new Schema({
   donationValue: {type: Number, required: false, get: getCurrency, set: setCurrency},
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
-});
+})
 
 function getCurrency (v) {
-  if(v != null){
-    return v.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-  }else{
-    v = 0.00;
-    return v.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  if (v != null) {
+    return v.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+  }else {
+    v = 0.00
+    return v.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
   }
-};
+}
 
 function setCurrency (v) {
-  return v.replace(/[^0-9.]/g, '');
-};
+  return v.replace(/[^0-9.]/g, '')
+}
 
-module.exports = mongoose.model('Donation', donationSchema);
+module.exports = mongoose.model('Donation', donationSchema)

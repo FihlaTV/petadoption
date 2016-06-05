@@ -1,5 +1,5 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 var attractSchema = new Schema({
   organizationId: Schema.Types.ObjectId,
@@ -19,6 +19,6 @@ var attractSchema = new Schema({
   },
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
-});
+})
 
-module.exports = mongoose.model('Attract', attractSchema);
+module.exports = mongoose.model('Attract', attractSchema)
