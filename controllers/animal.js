@@ -56,7 +56,6 @@ var AnimalController = {
       if (err)
         res({err: 'Não foi possível retornar os dados do animal!'})
 
-
       animal.save(function (err, user) {
         if (error)
           callback({error: 'Não foi possível atualizar o usuário!'})
