@@ -1,5 +1,5 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 var animalSchema = new Schema({
   organizationId: Schema.Types.ObjectId,
@@ -11,7 +11,7 @@ var animalSchema = new Schema({
   colors: [String], // (amarelo, branco, preto, um ou mais cores)
   fur: {type: String, trim: true, required: false}, // (curto, médio, longo)
   size: {type: String, trim: true, required: false}, // (pequeno, medio, grande)
-  neutered: {type: Boolean, required: false}, //(sim, nao)
+  neutered: {type: Boolean, required: false}, // (sim, nao)
   vaccinated: {type: Boolean, required: false}, // (sim, nao)
   vermifugated: {type: Boolean, required: false}, // (sim, nao)
   history: {type: String, trim: true, required: false},
@@ -23,7 +23,7 @@ var animalSchema = new Schema({
   affectionate: {type: Number, required: false},
   temporaryPlace: {
     _id: {type: Schema.Types.ObjectId, required: false},
-    user: {  // responsável
+    user: { // responsável
       _id: {type: Schema.Types.ObjectId, required: false},
       name: {type: String, trim: true, required: false},
       type: {type: String, trim: true, required: false},
@@ -38,6 +38,6 @@ var animalSchema = new Schema({
   },
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
-});
+})
 
-module.exports = mongoose.model('Animal', animalSchema);
+module.exports = mongoose.model('Animal', animalSchema)

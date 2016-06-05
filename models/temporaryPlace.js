@@ -1,9 +1,9 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 var temporaryPlaceSchema = new Schema({
   organizationId: Schema.Types.ObjectId,
-  user: {  // responsável
+  user: { // responsável
     _id: {type: Schema.Types.ObjectId, required: false},
     name: {type: String, trim: true, required: false},
     type: {type: String, trim: true, required: false},
@@ -24,6 +24,6 @@ var temporaryPlaceSchema = new Schema({
   },
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
-});
+})
 
-module.exports = mongoose.model('TemporaryPlace', temporaryPlaceSchema);
+module.exports = mongoose.model('TemporaryPlace', temporaryPlaceSchema)
