@@ -181,7 +181,7 @@ describe('TemporaryPlace', () => {
           .send(temporaryPlace)
           .then((res) => {
             res.should.have.status(200)
-            console.log(res.body)
+            // console.log(res.body)
             done()
           })
           .catch((err) => {
@@ -236,7 +236,7 @@ describe('TemporaryPlace', () => {
           .send(temporaryPlace)
           .then((res) => {
             res.should.have.status(200)
-            console.log(res.body)
+            // console.log(res.body)
             done()
           })
           .catch((err) => {

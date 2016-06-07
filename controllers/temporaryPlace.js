@@ -12,48 +12,50 @@ var TemporaryPlaceController = {
         res.render('error', { error: err })
       })
   },
-  show: function (req, res) {
+  show: (req, res) => {
     TemporaryPlace.findById(req.params.id).execAsync()
-      .then(function (tempPlace) {
+      .then((tempPlace) => {
         res.render('temporaryPlace/show', { userActive: req.user, tempPlace: tempPlace })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log(err)
         res.render('error', { error: err })
       })
   },
-// create: function(req, res) {
-//   User.findById(req.user._id).execAsync()
-//   .then(function(user) {
-//     for (var key in req.body.user) {
-//       user[key] = req.body.user[key]
-//     }
-//     user['stage'] = 1
-//     return user.saveAsync()
-//   })
-//   .then(function(user) {
-//     var org = new Organization()
-//     for (var key in req.body.organization) {
-//       org[key] = req.body.organization[key]
-//     }
-//     return org.saveAsync()
-//   })
-//   .then(function(org){
-//     req.body.shelter.forEach(function(shelter, index){
-//       var newShelter = new Shelter()
-//       newShelter.organizationId = org._id
-//       for (var key in shelter) {
-//         newShelter[key] = shelter[key]
-//       }
-//       newShelter.saveAsync()
-//     })
-//     return res.redirect('/dashboard'); 
-//   })
-//   .catch(function(err){
-//     console.log('error:', err)
-//     return err
-//   })
-// }
+  create: (req, res) => {
+    var temporaryPlace = new TemporaryPlace()
+
+    for (var key in req.body) {
+      temporaryPlace[key] = req.body[key]
+    }
+
+    temporaryPlace.save((err, temporaryPlace) => {
+      if (err)
+        res.render('error', { error: err })
+
+      res.json(temporaryPlace)
+    })
+  },
+  update: (req, res) => {
+    TemporaryPlace.findById(req.params.id).execAsync()
+      .then((tempPlace) => {
+
+        for (var key in req.body) {
+          tempPlace[key] = req.body[key]
+        }
+
+        tempPlace.save((err, tempPlace) => {
+          if (err)
+            res.render('error', { error: err })
+
+          res.json(tempPlace)
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  }
 }
 
 module.exports = TemporaryPlaceController
