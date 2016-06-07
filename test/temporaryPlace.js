@@ -127,9 +127,15 @@ describe('TemporaryPlace', () => {
         agent
           .get('/tempplaces/' + tempplace_id)
           .then((res) => {
+<<<<<<< Updated upstream
             res.should.have.status(200);
             console.log(res.body);
             done();
+=======
+            res.should.have.status(200)
+            // console.log(res)
+            done()
+>>>>>>> Stashed changes
           })
           .catch((err) => {
             // console.log(err);
@@ -182,9 +188,18 @@ describe('TemporaryPlace', () => {
           .post('/tempplaces')
           .send(temporaryPlace)
           .then((res) => {
+<<<<<<< Updated upstream
             res.should.have.status(200);
             console.log(res.body);
             done();
+=======
+            // console.log(res.body)
+            res.should.have.status(200)
+            res.body.should.have.property('_id')
+            res.body.should.have.property('organizationId')
+            res.body.organizationId.should.be.equal(org_id.toString())
+            done()
+>>>>>>> Stashed changes
           })
           .catch((err) => {
             // console.log(err);
@@ -237,9 +252,18 @@ describe('TemporaryPlace', () => {
           .put('/tempplaces/' + tempplace_id)
           .send(temporaryPlace)
           .then((res) => {
+<<<<<<< Updated upstream
             res.should.have.status(200);
             console.log(res.body);
             done();
+=======
+            res.should.have.status(200)
+            res.body.should.have.property('_id')
+            res.body.should.have.property('organizationId')
+            res.body.organizationId.should.be.equal(org_id.toString())
+            res.body.description.should.be.equal('Description2')
+            done()
+>>>>>>> Stashed changes
           })
           .catch((err) => {
             // console.log(err);

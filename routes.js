@@ -32,8 +32,15 @@ module.exports = function(app, passport) {
   // Temporary Place =====================
   // =====================================
   //
+<<<<<<< Updated upstream
   app.get('/tempplaces/orgs/:id', isLoggedIn, tempplace.index);
   // app.get('/tempplaces/:id', isLoggedIn, tempplace.show);
+=======
+  app.get('/tempplaces/orgs/:id', isLoggedIn, tempplace.index)
+  app.get('/tempplaces/:id', isLoggedIn, tempplace.show)
+  app.post('/tempplaces', isLoggedIn, tempplace.create)
+  app.put('/tempplaces/:id', isLoggedIn, tempplace.update)
+>>>>>>> Stashed changes
   // 
   // =====================================
   // Org =================================
