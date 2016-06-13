@@ -1,7 +1,7 @@
 .col-md-3.left_col
   .left_col.scroll-view
     .navbar.nav_title(style='border: 0;')
-      a.site_title(href='index.html')
+      a.site_title(href='/')
         i.fa.fa-paw &nbsp;
         span Pet Adoption!  
     .clearfix
@@ -46,9 +46,9 @@
               li
                 a(href='/site') Site Settings 
               li
-                a(href='/places') Temporary Places 
+                a(href='/tempplaces?orgId=#{userActive.organizations[0]._id}') Temporary Places 
               li
-                a(href='/orgs') Organization 
+                a(href='/orgs/#{userActive.organizations[0]._id}') Organization 
       //-
         .menu_section
           h3 Live On
