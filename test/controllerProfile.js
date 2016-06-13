@@ -18,7 +18,19 @@ describe('Profile', () => {
   // User.collection.drop()
 
   var user_id
+  var org
 
+  before((done) => {
+    var newOrg = new Organization()
+    newOrg.name = 'Org01'
+
+    newOrg.save((err) => {
+      org = {
+        _id: newOrg._id
+      }
+      done()
+    })
+  })
 
   beforeEach((done) => {
     var newUser = new User()
@@ -26,6 +38,7 @@ describe('Profile', () => {
     newUser.local.email = 'teste@teste.com.br'
     newUser.local.password = newUser.generateHash('12345')
     newUser.stage = 1
+    newUser.organizations.push(org)
 
     newUser.save((err) => {
       user_id = newUser._id
@@ -77,7 +90,7 @@ describe('Profile', () => {
       })
       .catch((err) => {
         console.log(err)
-        throw err
+        done(err)
       })
   })
 
@@ -115,7 +128,7 @@ describe('Profile', () => {
       })
       .catch((err) => {
         console.log(err)
-        throw err
+        done(err)
       })
   })
 
@@ -163,7 +176,7 @@ describe('Profile', () => {
       })
       .catch((err) => {
         console.log(err)
-        throw err
+        done(err)
       })
   })
 
@@ -191,6 +204,7 @@ describe('Profile', () => {
             newUser.identification.code = '123456'
             newUser.gender = 'F'
             newUser.dateBorn = new Date('November 01, 1984 11:13:00')
+            newUser.organizations.push(org)
 
             var addresses = [{
               country: 'Brazil',
@@ -236,7 +250,7 @@ describe('Profile', () => {
       })
       .catch((err) => {
         console.log(err)
-        throw err
+        done(err)
       })
   })
 })
