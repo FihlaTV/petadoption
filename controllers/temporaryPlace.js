@@ -3,7 +3,7 @@ var TemporaryPlace = require('./../models/temporaryPlace')
 
 var TemporaryPlaceController = {
   index: (req, res) => {
-    TemporaryPlace.find({organizationId: req.params.id}).execAsync()
+    TemporaryPlace.find({organizationId: req.body.orgId}).execAsync()
       .then((tempPlaces) => {
         res.render('temporaryPlace/index', { userActive: req.user, tempPlaces: tempPlaces })
       })

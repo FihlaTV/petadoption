@@ -88,7 +88,7 @@ describe('TemporaryPlace', () => {
     done()
   })
 
-  it('should list ALL TemporaryPlaces on /tempplaces/orgs/<id> GET', (done) => {
+  it('should list ALL TemporaryPlaces on /tempplaces GET', (done) => {
     agent
       .post('/login')
       .send({ email: 'teste@teste.com.br', password: '12345' })
@@ -97,7 +97,8 @@ describe('TemporaryPlace', () => {
       })
       .then((res) => {
         agent
-          .get('/tempplaces/orgs/' + org_id)
+          .get('/tempplaces')
+          .send({ orgId: org_id })
           .then((res) => {
             res.should.have.status(200)
             done()
