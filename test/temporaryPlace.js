@@ -21,6 +21,19 @@ describe('TemporaryPlace', () => {
   var user_email
   var org_id
   var tempplace_id
+  var org
+
+  before((done) => {
+    var newOrg = new Organization()
+    newOrg.name = 'Org01'
+
+    newOrg.save((err) => {
+      org = {
+        _id: newOrg._id
+      }
+      done()
+    })
+  })
 
   beforeEach((done) => {
 
@@ -30,6 +43,7 @@ describe('TemporaryPlace', () => {
       newUser.local.email = email
       newUser.local.password = newUser.generateHash(senha)
       newUser.stage = 1
+      newUser.organizations.push(org)
 
       return newUser.saveAsync()
     }).then((user) => {
