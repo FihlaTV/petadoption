@@ -12,6 +12,16 @@ var TemporaryPlaceController = {
         res.render('error', { error: err })
       })
   },
+  new: (req, res) => {
+    User.find({organizations: req.user.organizations[0]}).execAsync()
+      .then((users) => {
+        res.render('temporaryPlace/new', { userActive: req.user, users: users })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  },
   show: (req, res) => {
     TemporaryPlace.findById(req.params.id).execAsync()
       .then((tempPlace) => {

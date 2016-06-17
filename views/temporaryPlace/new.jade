@@ -1,0 +1,183 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  div
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          //- 
+            .x_title
+              h2
+                | Form validation 
+                small sub title
+              .clearfix
+          .x_content
+            form.form-horizontal.form-label-left(action='/tempplaces', method="post", novalidate='')
+              span.section Temporary Place
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                  | Name 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#name.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='name', placeholder='Temporary place name', required='required', type='text', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='user')
+                  | Caregiver 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  select.form-control
+                    option Choose option
+                    each user in users
+                      option= user.name
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                  | Capacity 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#capacity.form-control.col-md-7.col-xs-12(type='number', name='capacity', required='required', placeholder='Capacity', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                  | Description 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#description.form-control.col-md-7.col-xs-12(type='text', name='description', placeholder='Description', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                  | Country 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#country.form-control.col-md-7.col-xs-12(type='text', name='address[country]', placeholder='Country', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
+                  | State 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#state.form-control.col-md-7.col-xs-12(type='text', name='address[state]', placeholder='State', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
+                  | City 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#city.form-control.col-md-7.col-xs-12(type='text', name='address[city]', placeholder='City', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='district')
+                  | District 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#district.form-control.col-md-7.col-xs-12(type='text', name='address[district]', placeholder='District', required='required', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
+                  | Street 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#street.form-control.col-md-7.col-xs-12(type='text', name='address[street]', placeholder='Street', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
+                  | Number 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#number.form-control.col-md-7.col-xs-12(type='text', name='address[number]', placeholder='Number', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
+                  | Complement 
+                .col-md-6.col-sm-6.col-xs-12
+                  input#complement.form-control.col-md-7.col-xs-12(type='text', name='address[complement]', placeholder='Complement', value='')
+
+              .ln_solid
+              .form-group
+                .col-md-6.col-md-offset-3
+                  button.btn.btn-primary(type='') Cancel
+                  button#send.btn.btn-success(type='submit') Submit
+block javascript
+  // form validation
+  //- script(src='../js/validator/validator.js')
+  script.
+    // initialize the validator function
+    //- validator.message['date'] = 'not a real date';
+    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+    //- $('form')
+    //- .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+    //- .on('change', 'select.required', validator.checkField)
+    //- .on('keypress', 'input[required][pattern]', validator.keypress);
+    //- $('.multi.required')
+    //- .on('keyup blur', 'input', function() {
+    //-   validator.checkField.apply($(this).siblings().last()[0]);
+    //- });
+    // bind the validation to the form submit event
+    //$('#send').click('submit');//.prop('disabled', true);
+    $('form').submit(function(e) {
+      e.preventDefault();
+      var submit = true;
+
+      if (submit){
+        return this.submit();
+      } else {
+        return false;
+      }
+    });
+
+    //- $(document).ready(function(){
+    $(function() {
+      var scntDiv = $('#p_scents');
+      var i = $('#p_scents #fItem').size();
+      //- console.log('item: ' + i);
+      //- alert(i);
+
+      function remove() {
+        //- console.log('remover - ' + i);
+        if( i > 1 ) {
+          $(this).parents('div[id="fItem"]').remove()
+          //- i--;
+        }
+        //- console.log('remover - ' + i);
+        return false;
+      }
+
+      function addLabel() {
+        $('<div id="fItem"><div class="form-group"><label for="country" class="control-label col-md-3 col-sm-3 col-xs-12">Country </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="country" type="text" name="addresses['+ i +'][country]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="state" class="control-label col-md-3 col-sm-3 col-xs-12">State </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="state" type="text" name="addresses['+ i +'][state]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="city" class="control-label col-md-3 col-sm-3 col-xs-12">City </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="city" type="text" name="addresses['+ i +'][city]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="district" class="control-label col-md-3 col-sm-3 col-xs-12">District </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="district" type="text" name="addresses['+ i +'][district]" required="required" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="street" class="control-label col-md-3 col-sm-3 col-xs-12">Street </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="street" type="text" name="addresses['+ i +'][street]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="number" class="control-label col-md-3 col-sm-3 col-xs-12">Number </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="number" type="text" name="addresses['+ i +'][number]" class="form-control col-md-7 col-xs-12"></div></div><div class="form-group"><label for="complement" class="control-label col-md-3 col-sm-3 col-xs-12">Complement </label><div class="col-md-6 col-sm-6 col-xs-12"><input id="complement" type="text" name="addresses['+ i +'][complement]" class="form-control col-md-7 col-xs-12"></div></div><a id="remScnt" href="#">Remove</a></div>').appendTo(scntDiv);
+        //- console.log(i);
+        i++;
+        $('a[id="remScnt"]').off('click');
+        $('a[id="remScnt"]').on('click', remove);
+        return false;
+      }
+      $('#addScnt').on("click", addLabel);
+      $('a[id="remScnt"]').off('click');
+      $('a[id="remScnt"]').on('click', remove);
+    });
+
+    //- $(document).ready(function(){ 
+    //-   $('#addScnt').on("click", addLabel);
+    //-   $('a[id="remScnt"]').off('click');
+    //-   $('a[id="remScnt"]').on('click', remove);
+    //- }) 
+    //- $(window).load(function(){ /*code here*/ })
+
+    //- $('form').submit(function(e) {
+    //-   console.log("sdafasdf");
+    //-   e.preventDefault();
+    //-   var submit = true;
+    //-   // evaluate the form using generic validaing
+    //-   //- if (!validator.checkAll($(this))) {
+    //-   //-   submit = false;
+    //-   //- }
+
+    //-   console.log("teste");
+
+    //-   if (submit)
+    //-     this.submit();
+    //-   return false;
+    //- });
+    /* FOR DEMO ONLY */
+
+    //- $('#vfields').change(function() {
+    //-   $('form').toggleClass('mode2');
+    //- }).prop('checked', false);
+    //- $('#alerts').change(function() {
+    //-   validator.defaults.alerts = (this.checked) ? false : true;
+    //-   if (this.checked)
+    //-     $('form .alert').remove();
+    //- }).prop('checked', false);
