@@ -5,6 +5,7 @@ var chaiHttp = require('chai-http')
 
 var server = require('../bin/www')
 var User = require('../models/user')
+var Organization = require('../models/organization')
 
 var should = chai.should()
 chai.use(chaiHttp)
@@ -15,37 +16,48 @@ describe('Authentication', () => {
 
   beforeEach((done) => {
 
-    var address = {
-      country: 'Brazil',
-      state: 'Minas Gerais',
-      city: 'Belo Horizonte',
-      district: 'Funcionários',
-      street: 'Praça da Liberdade',
-      number: '450',
-      complement: ''
-    }
+    var newOrg = new Organization()
+    newOrg.name = 'Org01'
 
-    var newUser = new User()
+    newOrg.save((err) => {
 
-    newUser.local.email = 'teste@teste.com.br'
-    newUser.local.password = newUser.generateHash('12345')
-    newUser.stage = 1
-    newUser.name = 'Usuário Teste'
-    newUser.identification.type = 'CPF'; // cpf, rg, ...
-    newUser.identification.code = '15367244408'; // http://www.geradordecpf.org/
-    newUser.gender = 'male'
-    newUser.type = 'employee'; // funcionario, cuidador
-    newUser.dateBorn = new Date('03/30/2016')
-    newUser.phones = ['5531912345678']
-    newUser.address = [address]
+      var address = {
+        country: 'Brazil',
+        state: 'Minas Gerais',
+        city: 'Belo Horizonte',
+        district: 'Funcionários',
+        street: 'Praça da Liberdade',
+        number: '450',
+        complement: ''
+      }
 
-    newUser.save((err) => {
-      done()
+      var newUser = new User()
+
+      newUser.local.email = 'teste@teste.com.br'
+      newUser.local.password = newUser.generateHash('12345')
+      newUser.stage = 1
+      newUser.name = 'Usuário Teste'
+      newUser.identification.type = 'CPF'; // cpf, rg, ...
+      newUser.identification.code = '15367244408'; // http://www.geradordecpf.org/
+      newUser.gender = 'male'
+      newUser.type = 'employee'; // funcionario, cuidador
+      newUser.dateBorn = new Date('03/30/2016')
+      newUser.phones = ['5531912345678']
+      newUser.address = [address]
+      var org = {
+        _id: newOrg._id
+      }
+      newUser.organizations.push(org)
+
+      newUser.save((err) => {
+        done()
+      })
     })
   })
 
   afterEach((done) => {
     User.collection.drop()
+    Organization.collection.drop()
     done()
   })
 
@@ -97,7 +109,7 @@ describe('Authentication', () => {
       })
       .catch((err) => {
         console.log(err)
-        throw err
+        done(err)
       })
   })
 

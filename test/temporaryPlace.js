@@ -21,11 +21,23 @@ describe('TemporaryPlace', () => {
   var user_email
   var org_id
   var tempplace_id
+  var org
+
+  before((done) => {
+    var newOrg = new Organization()
+    newOrg.name = 'Org01'
+
+    newOrg.save((err) => {
+      org = {
+        _id: newOrg._id
+      }
+      done()
+    })
+  })
 
   beforeEach((done) => {
 
-    Promise.resolve(['teste@teste.com.br', '12345']).spread((email, senha) => {
-      // Promise.resolve().spread(() => {
+    Promise.try(() => {
       var newOrg = new Organization()
       newOrg.name = 'Org01'
 

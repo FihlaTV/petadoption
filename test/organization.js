@@ -17,33 +17,38 @@ describe('Organization', () => {
 
   // User.collection.drop()
 
-  var org_id
+  var org
 
   beforeEach((done) => {
-    var newUser = new User()
 
-    newUser.local.email = 'teste@teste.com.br'
-    newUser.local.password = newUser.generateHash('12345')
-    newUser.stage = 1
+    var newOrg = new Organization()
+    newOrg.name = 'Org01'
 
-    newUser.save((err) => {
+    newOrg.save((err) => {
+      org = {
+        _id: newOrg._id
+      }
 
-      var newOrg = new Organization()
-      newOrg.name = 'Org01'
+      var newUser = new User()
 
-      newOrg.save((err) => {
-        org_id = newOrg._id
+      newUser.local.email = 'teste@teste.com.br'
+      newUser.local.password = newUser.generateHash('12345')
+      newUser.stage = 1
+      newUser.organizations.push(org)
+
+      newUser.save((err) => {
         done()
       })
     })
   })
 
   afterEach((done) => {
+    User.collection.drop()
     Organization.collection.drop()
     done()
   })
 
-  it('should complete the information for the user /users/:id PUT', (done) => {
+  it('should update the information of the organization /orgs/:id PUT', (done) => {
     agent
       .post('/login')
       .send({ email: 'teste@teste.com.br', password: '12345' })
@@ -63,13 +68,12 @@ describe('Organization', () => {
 
         var newOrg = new Organization()
 
-        newOrg._id = org_id
+        newOrg._id = org._id
         newOrg.name = 'Organization 01'
         newOrg.addresses = addresses
-        // done()
 
         agent
-          .put('/orgs/' + org_id)
+          .put('/orgs/' + org._id)
           .send(newOrg)
           .then((res) => {
             res.should.have.status(200)
@@ -77,12 +81,12 @@ describe('Organization', () => {
           })
           .catch((err) => {
             console.log(err)
-            throw err
+            done(err)
           })
       })
       .catch((err) => {
         console.log(err)
-        throw err
+        done(err)
       })
   })
 })
