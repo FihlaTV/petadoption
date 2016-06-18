@@ -25,25 +25,25 @@ describe('TemporaryPlace', () => {
   beforeEach((done) => {
 
     Promise.resolve(['teste@teste.com.br', '12345']).spread((email, senha) => {
-      var newUser = new User()
-
-      newUser.local.email = email
-      newUser.local.password = newUser.generateHash(senha)
-      newUser.stage = 1
-
-      return newUser.saveAsync()
-    }).then((user) => {
-
-      user_id = user._id
-      user_email = user.local.email
-
+      // Promise.resolve().spread(() => {
       var newOrg = new Organization()
       newOrg.name = 'Org01'
 
-      newOrg.saveAsync()
+      return newOrg.saveAsync()
+    }).then((org) => {
+      var newUser = new User()
 
-      return ([user, newOrg])
+      newUser.local.email = 'teste@teste.com.br'
+      newUser.local.password = newUser.generateHash('12345')
+      newUser.stage = 1
+      newUser.organizations.push({_id: org._id})
+
+      newUser.saveAsync()
+
+      return ([newUser, org])
     }).then((objs) => {
+      user_id = objs[0]._id
+      user_email = objs[0].local.email
 
       org_id = objs[1]._id
 
