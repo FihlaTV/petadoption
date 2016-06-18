@@ -2478,6 +2478,10 @@ span.section {
   border-bottom: 1px solid #e5e5e5;
 }
 
+span.section div{
+  margin-bottom: 20px;
+}
+
 .form-control {
     border-radius: 0;
     line-height: 30px;
@@ -4358,10 +4362,10 @@ ul.widget_profile_box li a:hover {
 }
 
 ul.widget_profile_box li .profile_img {
-    width: 85px;
-    height: 85px;
+    width: 75px;
+    height: 75px;
     margin: 0;
-    margin-top: -28px;
+    margin-top: -22px;
 }
 
 .widget_tally_box p,

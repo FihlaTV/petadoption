@@ -15,69 +15,76 @@ block page
                 small sub title
               .clearfix
           .x_content
-            form.form-horizontal.form-label-left(action='/tempplaces/' + tempPlace._id, method="post", novalidate='')
-              input(type='hidden', name="_method", value="PUT")
-              input(type='hidden', name="_id", value="#{tempPlace._id}")
+            form.form-horizontal.form-label-left(action='/tempplaces', method="post", novalidate='')
               span.section Temporary Place
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
                   | Name 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#name.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='name', placeholder='Temporary place name', required='required', type='text', value='#{tempPlace.name}')
+                  input#name.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='name', placeholder='Temporary place name', required='required', type='text', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='user')
+                  | Caregiver 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  select.form-control
+                    option Choose option
+                    each user in users
+                      option= user.name
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
                   | Capacity 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#capacity.form-control.col-md-7.col-xs-12(type='number', name='capacity', required='required', value='#{tempPlace.capacity}')
+                  input#capacity.form-control.col-md-7.col-xs-12(type='number', name='capacity', required='required', placeholder='Capacity', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
                   | Description 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#description.form-control.col-md-7.col-xs-12(type='text', name='description', value='#{tempPlace.description}')                  	
+                  input#description.form-control.col-md-7.col-xs-12(type='text', name='description', placeholder='Description', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
                   | Country 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#country.form-control.col-md-7.col-xs-12(type='text', name='address[country]', value='#{tempPlace.address.country}')
+                  input#country.form-control.col-md-7.col-xs-12(type='text', name='address[country]', placeholder='Country', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
                   | State 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#state.form-control.col-md-7.col-xs-12(type='text', name='address[state]', value='#{tempPlace.address.state}')
+                  input#state.form-control.col-md-7.col-xs-12(type='text', name='address[state]', placeholder='State', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
                   | City 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#city.form-control.col-md-7.col-xs-12(type='text', name='address[city]', value='#{tempPlace.address.city}')
+                  input#city.form-control.col-md-7.col-xs-12(type='text', name='address[city]', placeholder='City', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='district')
                   | District 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#district.form-control.col-md-7.col-xs-12(type='text', name='address[district]', required='required', value='#{tempPlace.address.district}')
+                  input#district.form-control.col-md-7.col-xs-12(type='text', name='address[district]', placeholder='District', required='required', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
                   | Street 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#street.form-control.col-md-7.col-xs-12(type='text', name='address[street]', value='#{tempPlace.address.street}')
+                  input#street.form-control.col-md-7.col-xs-12(type='text', name='address[street]', placeholder='Street', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
                   | Number 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#number.form-control.col-md-7.col-xs-12(type='text', name='address[number]', value='#{tempPlace.address.number}')
+                  input#number.form-control.col-md-7.col-xs-12(type='text', name='address[number]', placeholder='Number', value='')
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
                   | Complement 
                 .col-md-6.col-sm-6.col-xs-12
-                  input#complement.form-control.col-md-7.col-xs-12(type='text', name='address[complement]', value='#{tempPlace.address.complement}')
+                  input#complement.form-control.col-md-7.col-xs-12(type='text', name='address[complement]', placeholder='Complement', value='')
 
               .ln_solid
               .form-group

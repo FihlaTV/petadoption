@@ -8,7 +8,6 @@ var OrganizationController = {
   show: (req, res) => {
     Organization.findById(req.params.id).execAsync()
       .then((org) => {
-        return org
         res.render('org/show', { userActive: req.user, org: org })
       })
       .catch(err => {
@@ -38,7 +37,12 @@ var OrganizationController = {
           org[key] = req.body[key]
         }
 
-        res.render('org/show', { userActive: req.user, org: org })
+        org.save((err, newOrg) => {
+          if (err)
+            res.render('error', { error: err })
+
+          res.render('org/show', { userActive: req.user, org: newOrg })
+        })
       })
       .catch(err => {
         console.log(err)

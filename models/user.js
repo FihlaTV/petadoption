@@ -1,8 +1,9 @@
 var mongoose = require('mongoose')
 var bcrypt = require('bcrypt-nodejs')
+var Schema = mongoose.Schema
 
 // define the schema for our user model
-var userSchema = mongoose.Schema({
+var userSchema = new Schema({
   local: {
     email: {type: String, trim: true, required: false},
     password: {type: String, trim: true, required: false}
@@ -45,6 +46,9 @@ var userSchema = mongoose.Schema({
     complement: {type: String, trim: true, required: false}
   }],
   stage: {type: Number, default: 0},
+  organizations: [{
+    _id: {type: Schema.Types.ObjectId, required: false}
+  }],
   description: {type: String, trim: true, default: '', required: false},
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}

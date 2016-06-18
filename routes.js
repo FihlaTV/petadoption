@@ -27,7 +27,8 @@ module.exports = function (app, passport) {
   // Temporary Place =====================
   // =====================================
   //
-  app.get('/tempplaces/orgs/:id', isLoggedIn, tempplace.index)
+  app.get('/tempplaces', isLoggedIn, tempplace.index)
+  app.get('/tempplaces/new', isLoggedIn, tempplace.new)
   app.get('/tempplaces/:id', isLoggedIn, tempplace.show)
   app.post('/tempplaces', isLoggedIn, tempplace.create)
   app.put('/tempplaces/:id', isLoggedIn, tempplace.update)

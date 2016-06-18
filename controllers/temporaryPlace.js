@@ -3,9 +3,19 @@ var TemporaryPlace = require('./../models/temporaryPlace')
 
 var TemporaryPlaceController = {
   index: (req, res) => {
-    TemporaryPlace.find({organizationId: req.params.id}).execAsync()
+    TemporaryPlace.find({organizationId: req.body.orgId}).execAsync()
       .then((tempPlaces) => {
         res.render('temporaryPlace/index', { userActive: req.user, tempPlaces: tempPlaces })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  },
+  new: (req, res) => {
+    User.find({organizations: req.user.organizations[0]}).execAsync()
+      .then((users) => {
+        res.render('temporaryPlace/new', { userActive: req.user, users: users })
       })
       .catch((err) => {
         console.log(err)
