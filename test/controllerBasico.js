@@ -13,16 +13,14 @@ chai.use(chaiHttp)
 var agent = chai.request.agent(server)
 
 describe('User', function () {
-  var org
+  var orgId
 
   before((done) => {
     var newOrg = new Organization()
     newOrg.name = 'Org01'
 
     newOrg.save((err) => {
-      org = {
-        _id: newOrg._id
-      }
+      orgId = newOrg._id
       done()
     })
   })
@@ -56,10 +54,7 @@ describe('User', function () {
       newUser.dateBorn = new Date('03/30/2016')
       newUser.phones = ['5531912345678']
       newUser.address = [address]
-      // org = {
-      //   _id: newOrg._id
-      // }
-      newUser.organizations.push(org)
+      newUser.organizationId = orgId
 
       newUser.save((err) => {
         done()
@@ -131,7 +126,7 @@ describe('User', function () {
     newUser.dateBorn = new Date('03/30/2016')
     newUser.phones = ['5531912345678']
     newUser.address = address
-    newUser.organizations.push(org)
+    newUser.organizationId = orgId
 
     newUser.save((err, user) => {
       agent

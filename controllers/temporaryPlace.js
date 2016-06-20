@@ -1,3 +1,4 @@
+var Promise = require('bluebird')
 var User = require('./../models/user')
 var TemporaryPlace = require('./../models/temporaryPlace')
 
@@ -13,7 +14,7 @@ var TemporaryPlaceController = {
       })
   },
   new: (req, res) => {
-    User.find({organizations: req.user.organizations[0]}).execAsync()
+    User.find({organizationId: req.user.organizationId}).execAsync()
       .then((users) => {
         res.render('temporaryPlace/new', { userActive: req.user, users: users })
       })
@@ -25,7 +26,10 @@ var TemporaryPlaceController = {
   show: (req, res) => {
     TemporaryPlace.findById(req.params.id).execAsync()
       .then((tempPlace) => {
-        res.render('temporaryPlace/show', { userActive: req.user, tempPlace: tempPlace })
+        User.find({organizationId: tempPlace.organizationId}).execAsync()
+          .then((users) => {
+            res.render('temporaryPlace/show', { userActive: req.user, users: users, tempPlace: tempPlace})
+          })
       })
       .catch((err) => {
         console.log(err)
@@ -39,11 +43,13 @@ var TemporaryPlaceController = {
       temporaryPlace[key] = req.body[key]
     }
 
-    temporaryPlace.save((err, temporaryPlace) => {
+    temporaryPlace.organizationId = req.user.organizationId
+
+    temporaryPlace.save((err, tempPlace) => {
       if (err)
         res.render('error', { error: err })
 
-      res.json(temporaryPlace)
+      res.render('temporaryPlace/show', { userActive: req.user, tempPlace: tempPlace })
     })
   },
   update: (req, res) => {

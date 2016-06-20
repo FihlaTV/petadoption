@@ -21,16 +21,13 @@ describe('TemporaryPlace', () => {
   var user_email
   var org_id
   var tempplace_id
-  var org
 
   before((done) => {
     var newOrg = new Organization()
     newOrg.name = 'Org01'
 
     newOrg.save((err) => {
-      org = {
-        _id: newOrg._id
-      }
+      org_id = newOrg._id
       done()
     })
   })
@@ -48,7 +45,7 @@ describe('TemporaryPlace', () => {
       newUser.local.email = 'teste@teste.com.br'
       newUser.local.password = newUser.generateHash('12345')
       newUser.stage = 1
-      newUser.organizations.push({_id: org._id})
+      newUser.organizationId = org_id
 
       newUser.saveAsync()
 
@@ -70,12 +67,7 @@ describe('TemporaryPlace', () => {
       }
 
       var user = {
-        _id: objs[0]._id,
-        name: '',
-        type: '',
-        code: '',
-        email: objs[0].local.email,
-        phones: []
+        _id: objs[0]._id
       }
 
       var temporaryPlace = new TemporaryPlace()
@@ -174,12 +166,7 @@ describe('TemporaryPlace', () => {
         }
 
         var user = {
-          _id: user_id,
-          name: '',
-          type: '',
-          code: '',
-          email: user_email,
-          phones: []
+          _id: user_id
         }
 
         var temporaryPlace = new TemporaryPlace()
@@ -229,12 +216,7 @@ describe('TemporaryPlace', () => {
         }
 
         var user = {
-          _id: user_id,
-          name: '',
-          type: '',
-          code: '',
-          email: user_email,
-          phones: []
+          _id: user_id
         }
 
         var temporaryPlace = new TemporaryPlace()

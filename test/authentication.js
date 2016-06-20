@@ -44,10 +44,7 @@ describe('Authentication', () => {
       newUser.dateBorn = new Date('03/30/2016')
       newUser.phones = ['5531912345678']
       newUser.address = [address]
-      var org = {
-        _id: newOrg._id
-      }
-      newUser.organizations.push(org)
+      newUser.organizationId = newOrg._id
 
       newUser.save((err) => {
         done()

@@ -18,16 +18,14 @@ describe('Profile', () => {
   // User.collection.drop()
 
   var user_id
-  var org
+  var orgId
 
   before((done) => {
     var newOrg = new Organization()
     newOrg.name = 'Org01'
 
     newOrg.save((err) => {
-      org = {
-        _id: newOrg._id
-      }
+      orgId = newOrg._id
       done()
     })
   })
@@ -38,7 +36,7 @@ describe('Profile', () => {
     newUser.local.email = 'teste@teste.com.br'
     newUser.local.password = newUser.generateHash('12345')
     newUser.stage = 1
-    newUser.organizations.push(org)
+    newUser.organizationId = orgId
 
     newUser.save((err) => {
       user_id = newUser._id
@@ -204,7 +202,7 @@ describe('Profile', () => {
             newUser.identification.code = '123456'
             newUser.gender = 'F'
             newUser.dateBorn = new Date('November 01, 1984 11:13:00')
-            newUser.organizations.push(org)
+            newUser.organizationId = orgId
 
             var addresses = [{
               country: 'Brazil',
