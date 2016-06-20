@@ -4,7 +4,7 @@ var UserController = {
   index: function (req, res) {
     User.find({ flActive: true }, function (err, users) {
       if (err)
-        res.send(err)
+        res.render('error', { error: err })
 
       res.json(users)
     // res.render('users/index', { users: users })
@@ -13,7 +13,7 @@ var UserController = {
   show: function (req, res) {
     User.findById(req.params.id, function (err, user) {
       if (err)
-        res.send(err)
+        res.render('error', { error: err })
 
       res.json(user)
     // res.render('users/show', { user: user })
@@ -28,7 +28,7 @@ var UserController = {
 
     user.save(function (err, user) {
       if (err)
-        res.send(err)
+        res.render('error', { error: err })
 
       res.json(user)
     // res.json({ message: 'user created!' })
@@ -37,7 +37,7 @@ var UserController = {
   update: function (req, res) {
     User.findById(req.params.id, function (err, user) {
       if (err)
-        res.send(err)
+        res.render('error', { error: err })
 
       for (var key in req.body) {
         user[key] = req.body[key]
@@ -45,7 +45,7 @@ var UserController = {
 
       user.save(function (err) {
         if (err)
-          res.send(err)
+          res.render('error', { error: err })
 
         res.json(user)
       // res.json({ message: 'User updated!' })
@@ -55,7 +55,7 @@ var UserController = {
   patch: function (req, res) {
     User.findById(req.params.id, function (err, user) {
       if (err)
-        res.send(err)
+        res.render('error', { error: err })
 
       var op = req.body.op
       var path = req.body.path.substring(1)
@@ -81,7 +81,7 @@ var UserController = {
 
       user.save(function (err) {
         if (err)
-          res.send(err)
+          res.render('error', { error: err })
 
         res.json(user)
       // res.json({ message: 'User updated!' })
@@ -91,7 +91,7 @@ var UserController = {
   destroy: function (req, res) {
     User.remove({_id: req.params.id}, function (err, removed) {
       if (err)
-        res.send(err)
+        res.render('error', { error: err })
 
       res.json(removed) // qtt of removed users
     // res.json({ message: 'Successfully deleted' })

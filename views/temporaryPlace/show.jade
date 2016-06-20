@@ -27,7 +27,7 @@ block page
                   select.form-control(name="user[_id]")
                     option Choose option
                     each user in users
-                      option(value="#{user._id}")= user.name
+                      option(value="#{user._id}", selected="#{user._id == tempPlace.user._id}")= user.name
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
                   | Capacity 
