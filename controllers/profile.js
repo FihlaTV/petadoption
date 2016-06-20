@@ -17,20 +17,12 @@ var ProfileController = {
       })
       .catch(function (err) {
         console.log('error:', err)
-        return err
+        res.render('error', { error: err })
       })
   },
   create: function (req, res) {
-    User.findById(req.user._id).execAsync()
-      .then(function (user) {
-        for (var key in req.body.user) {
-          user[key] = req.body.user[key]
-        }
-        user['stage'] = 1
-
-        return user.saveAsync()
-      })
-      .then(function (user) {
+    Promise.resolve()
+      .then(() => {
         var org = new Organization()
 
         for (var key in req.body.organization) {
@@ -40,21 +32,33 @@ var ProfileController = {
         return org.saveAsync()
       })
       .then(function (org) {
-        req.body.shelter.forEach(function (shelter, index) {
-          var newShelter = new Shelter()
+        User.findById(req.user._id).execAsync()
+          .then(function (user) {
+            for (var key in req.body.user) {
+              user[key] = req.body.user[key]
+            }
+            user['stage'] = 1
+            user.organizationId = org._id
 
-          newShelter.organizationId = org._id
-          for (var key in shelter) {
-            newShelter[key] = shelter[key]
-          }
-          newShelter.saveAsync()
-        })
+            return user.saveAsync()
+          })
+          .then(function (user) {
+            req.body.shelter.forEach(function (shelter, index) {
+              var newShelter = new Shelter()
 
-        return res.redirect('/dashboard')
+              newShelter.organizationId = user.organizationId
+              for (var key in shelter) {
+                newShelter[key] = shelter[key]
+              }
+              newShelter.saveAsync()
+            })
+
+            return res.redirect('/dashboard')
+          })
       })
       .catch(function (err) {
         console.log('error:', err)
-        return err
+        res.render('error', { error: err })
       })
   }
 }

@@ -37,20 +37,27 @@ var TemporaryPlaceController = {
       })
   },
   create: (req, res) => {
-    var temporaryPlace = new TemporaryPlace()
+    User.find({organizationId: req.user.organizationId}).execAsync()
+      .then((users) => {
+        var temporaryPlace = new TemporaryPlace()
 
-    for (var key in req.body) {
-      temporaryPlace[key] = req.body[key]
-    }
+        for (var key in req.body) {
+          temporaryPlace[key] = req.body[key]
+        }
 
-    temporaryPlace.organizationId = req.user.organizationId
+        temporaryPlace.organizationId = req.user.organizationId
 
-    temporaryPlace.save((err, tempPlace) => {
-      if (err)
+        temporaryPlace.save((err, tempPlace) => {
+          if (err)
+            res.render('error', { error: err })
+
+          res.render('temporaryPlace/show', { userActive: req.user, users: users, tempPlace: tempPlace })
+        })
+      })
+      .catch((err) => {
+        console.log(err)
         res.render('error', { error: err })
-
-      res.render('temporaryPlace/show', { userActive: req.user, tempPlace: tempPlace })
-    })
+      })
   },
   update: (req, res) => {
     TemporaryPlace.findById(req.params.id).execAsync()
