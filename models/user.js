@@ -46,9 +46,7 @@ var userSchema = new Schema({
     complement: {type: String, trim: true, required: false}
   }],
   stage: {type: Number, default: 0},
-  organizations: [{
-    _id: {type: Schema.Types.ObjectId, required: false}
-  }],
+  organizationId: {type: Schema.Types.ObjectId, required: false},
   description: {type: String, trim: true, default: '', required: false},
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}

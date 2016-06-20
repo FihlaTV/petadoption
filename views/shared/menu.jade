@@ -46,9 +46,9 @@
               li
                 a(href='/site') Site Settings 
               li
-                a(href='/tempplaces?orgId=#{userActive.organizations[0]._id}') Temporary Places 
+                a(href='/tempplaces?orgId=#{userActive.organizationId}') Temporary Places 
               li
-                a(href='/orgs/#{userActive.organizations[0]._id}') Organization 
+                a(href='/orgs/#{userActive.organizationId}') Organization 
       //-
         .menu_section
           h3 Live On

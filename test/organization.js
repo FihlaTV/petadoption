@@ -17,7 +17,7 @@ describe('Organization', () => {
 
   // User.collection.drop()
 
-  var org
+  var orgId
 
   beforeEach((done) => {
 
@@ -25,16 +25,14 @@ describe('Organization', () => {
     newOrg.name = 'Org01'
 
     newOrg.save((err) => {
-      org = {
-        _id: newOrg._id
-      }
+      orgId = newOrg._id
 
       var newUser = new User()
 
       newUser.local.email = 'teste@teste.com.br'
       newUser.local.password = newUser.generateHash('12345')
       newUser.stage = 1
-      newUser.organizations.push(org)
+      newUser.organizationId = orgId
 
       newUser.save((err) => {
         done()
@@ -68,12 +66,12 @@ describe('Organization', () => {
 
         var newOrg = new Organization()
 
-        newOrg._id = org._id
+        newOrg._id = orgId
         newOrg.name = 'Organization 01'
         newOrg.addresses = addresses
 
         agent
-          .put('/orgs/' + org._id)
+          .put('/orgs/' + orgId)
           .send(newOrg)
           .then((res) => {
             res.should.have.status(200)

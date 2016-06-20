@@ -20,11 +20,14 @@ block page
               input(type='hidden', name="_id", value="#{tempPlace._id}")
               span.section Temporary Place
               .item.form-group
-                label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
-                  | Name 
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='user')
+                  | Caregiver 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  input#name.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='name', placeholder='Temporary place name', required='required', type='text', value='#{tempPlace.name}')
+                  select.form-control(name="user[_id]")
+                    option Choose option
+                    each user in users
+                      option(value="#{user._id}")= user.name
               .item.form-group
                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
                   | Capacity 
@@ -32,7 +35,7 @@ block page
                 .col-md-6.col-sm-6.col-xs-12
                   input#capacity.form-control.col-md-7.col-xs-12(type='number', name='capacity', required='required', value='#{tempPlace.capacity}')
               .item.form-group
-                label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='description')
                   | Description 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
