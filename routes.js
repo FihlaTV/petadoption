@@ -21,7 +21,8 @@ module.exports = function (app, passport) {
   // Shelter =============================
   // =====================================
   //
-  app.post('/shelters', isLoggedIn, shelter.create)
+  app.get('/shelters', isLoggedIn, shelter.index)
+  app.get('/shelters/new', isLoggedIn, shelter.new)
   //
   // =====================================
   // Temporary Place =====================
@@ -32,7 +33,7 @@ module.exports = function (app, passport) {
   app.get('/tempplaces/:id', isLoggedIn, tempplace.show)
   app.post('/tempplaces', isLoggedIn, tempplace.create)
   app.put('/tempplaces/:id', isLoggedIn, tempplace.update)
-  // 
+  //
   // =====================================
   // Org =================================
   // =====================================
@@ -160,7 +161,7 @@ module.exports = function (app, passport) {
 }
 // route middleware to make sure a user is logged in
 function isLoggedIn (req, res, next) {
-  // if user is authenticated in the session, carry on 
+  // if user is authenticated in the session, carry on
   if (req.isAuthenticated()) {
     if (req.user.stage != 1) {
       res.redirect('/profile')
