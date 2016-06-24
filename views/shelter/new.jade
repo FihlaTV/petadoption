@@ -1,0 +1,98 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  div
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          .x_content
+            form#formNewShelter.form-horizontal.form-label-left(action='/shelter/create', method="post", novalidate='')
+              span.section New Shelter
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='user')
+                  | Caregiver 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  select.form-control(name="user[_id]")
+                    option Choose option
+                    each user in users
+                      option(value="#{user._id}")= user.name
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                  | Name 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#name.form-control.col-md-7.col-xs-12(type='text', name='name', required='required', placeholder='Name', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='capacity')
+                  | Capacity 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#capacity.form-control.col-md-7.col-xs-12(type='number', name='capacity', required='required', placeholder='Capacity', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='country')
+                  | Country 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#country.form-control.col-md-7.col-xs-12(type='text', name='address[country]', placeholder='Country', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='state')
+                  | State 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#state.form-control.col-md-7.col-xs-12(type='text', name='address[state]', placeholder='State', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='city')
+                  | City 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#city.form-control.col-md-7.col-xs-12(type='text', name='address[city]', placeholder='City', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='district')
+                  | District 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#district.form-control.col-md-7.col-xs-12(type='text', name='address[district]', placeholder='District', required='required', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='street')
+                  | Street 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#street.form-control.col-md-7.col-xs-12(type='text', name='address[street]', placeholder='Street', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
+                  | Number 
+                  span.required *
+                .col-md-6.col-sm-6.col-xs-12
+                  input#number.form-control.col-md-7.col-xs-12(type='text', name='address[number]', placeholder='Number', value='')
+              .item.form-group
+                label.control-label.col-md-3.col-sm-3.col-xs-12(for='complement')
+                  | Complement 
+                .col-md-6.col-sm-6.col-xs-12
+                  input#complement.form-control.col-md-7.col-xs-12(type='text', name='address[complement]', placeholder='Complement', value='')
+
+              .ln_solid
+              .form-group
+                .col-md-6.col-md-offset-3
+                  a.btn.pull-left.btn-primary(type='', href="/shelters", title="Cancel new shelter") Cancel
+                  button#save.btn.btn-success(type='button', title="Save new shelter") Save
+block javascript
+  // form validation
+  script(src='../js/validator/validator.js')
+  script.
+    $('#formNewShelter').on('blur', 'input[required]', validator.checkField);
+    $('#save').click(function(){
+      if(validator.checkAll( $('#formNewShelter') ))
+        saveForm();
+    });
+    
+    $(function() {
+      $('[title]').tooltip();
+      
+      function saveForm(){
+          
+      }
+    });
