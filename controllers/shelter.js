@@ -1,27 +1,27 @@
 var Shelter = require('./../models/shelter'),
-User = require('./../models/user')
+  User = require('./../models/user')
 
 var ShelterController = {
-  index: function(req, res) {
-    console.log(req);
+  index: function (req, res) {
+    console.log(req)
     Shelter.find({ organizationId: req.body.orgId }).execAsync()
-    .then((shelters) => {
-      res.render('shelter/index', { userActive: req.user, shelters: shelters })
-    })
-    .catch((err) => {
-      console.log(err)
-      res.render('error', { error: err })
-    })
+      .then((shelters) => {
+        res.render('shelter/index', { userActive: req.user, shelters: shelters })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
   },
-  new: function(req, res) {
+  new: function (req, res) {
     User.find({organizationId: req.user.organizationId}).execAsync()
-    .then((users) => {
-      res.render('shelter/new', { userActive: req.user, users: users })
-    })
-    .catch((err) => {
-      console.log(err)
-      res.render('error', { error: err })
-    })
+      .then((users) => {
+        res.render('shelter/new', { userActive: req.user, users: users })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
   },
   create: function (req, res) {
     var shelter = new Shelter()
@@ -32,10 +32,10 @@ var ShelterController = {
 
     shelter.save(function (err, shelter) {
       if (err)
-      res.send(err)
+        res.send(err)
 
       res.json(shelter)
-      // res.json({ message: 'user created!' })
+    // res.json({ message: 'user created!' })
     })
   },
   // update: function(req, res) {
@@ -97,17 +97,17 @@ var ShelterController = {
   //     if (err)
   //       res.send(err)
 
-  //     res.json(removed) //qtt of removed users
-  //     //res.json({ message: 'Successfully deleted' })
-  //   })
-  // },
-  // profile: function(req, res) {
-  //   if (req.user.stage !== 3){
-  //     res.render('user/profile', { user: req.user })
-  //   }else{
-  //     res.redirect('/dashboard')
-  //   }
-  // }
+//     res.json(removed) //qtt of removed users
+//     //res.json({ message: 'Successfully deleted' })
+//   })
+// },
+// profile: function(req, res) {
+//   if (req.user.stage !== 3){
+//     res.render('user/profile', { user: req.user })
+//   }else{
+//     res.redirect('/dashboard')
+//   }
+// }
 }
 
 module.exports = ShelterController

@@ -23,6 +23,7 @@ module.exports = function (app, passport) {
   //
   app.get('/shelters', isLoggedIn, shelter.index)
   app.get('/shelters/new', isLoggedIn, shelter.new)
+  app.post('/shelters', isLoggedIn, shelter.create)
   //
   // =====================================
   // Temporary Place =====================
