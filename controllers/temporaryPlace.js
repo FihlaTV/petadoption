@@ -4,7 +4,9 @@ var TemporaryPlace = require('./../models/temporaryPlace')
 
 var TemporaryPlaceController = {
   index: (req, res) => {
-    TemporaryPlace.find({organizationId: req.body.orgId}).execAsync()
+    TemporaryPlace.find({organizationId: req.query.orgId})
+      .populate('user')
+      .execAsync()
       .then((tempPlaces) => {
         res.render('temporaryPlace/index', { userActive: req.user, tempPlaces: tempPlaces })
       })
@@ -26,6 +28,7 @@ var TemporaryPlaceController = {
   show: (req, res) => {
     TemporaryPlace.findById(req.params.id).execAsync()
       .then((tempPlace) => {
+
         User.find({organizationId: tempPlace.organizationId}).execAsync()
           .then((users) => {
             res.render('temporaryPlace/show', { userActive: req.user, users: users, tempPlace: tempPlace})
@@ -49,7 +52,7 @@ var TemporaryPlaceController = {
 
         temporaryPlace.save((err, tempPlace) => {
           if (err)
-            res.render('error', { error: err })
+            throw err
 
           res.render('temporaryPlace/show', { userActive: req.user, users: users, tempPlace: tempPlace })
         })
@@ -69,9 +72,12 @@ var TemporaryPlaceController = {
 
         tempPlace.save((err, tempPlace) => {
           if (err)
-            res.render('error', { error: err })
+            throw err
 
-          res.json(tempPlace)
+          User.find({organizationId: tempPlace.organizationId}).execAsync()
+            .then((users) => {
+              res.render('temporaryPlace/show', { userActive: req.user, users: users, tempPlace: tempPlace })
+            })
         })
       })
       .catch((err) => {

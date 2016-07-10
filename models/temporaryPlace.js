@@ -3,9 +3,7 @@ var Schema = mongoose.Schema
 
 var temporaryPlaceSchema = new Schema({
   organizationId: Schema.Types.ObjectId,
-  user: { // responsável
-    _id: {type: Schema.Types.ObjectId, required: false}
-  },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
   description: {type: String, trim: true, required: false},
   capacity: {type: Number, required: false},
   address: {

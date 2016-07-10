@@ -20,32 +20,30 @@ block page
                 |Temporary Place 
                 a.btn.pull-right.btn-primary(type='', href="/tempplaces/new") New
             .col-md-3.col-xs-12.widget.widget_tally_box
-              .x_panel.fixed_height_390
-                .x_content
-                  .flex
-                    ul.list-inline.widget_profile_box
-                      li
-                        a
-                          i.fa.fa-facebook
-                      li
-                        img.img-circle.profile_img(src='images/user.png', alt='...')
-                      li
-                        a
-                          i.fa.fa-twitter
-                  h3.name Musimbi
-                  .flex
-                    ul.list-inline.count2
-                      li
-                        h3 123
-                        span Articles
-                      li
-                        h3 1234
-                        span Followers
-                      li
-                        h3 123
-                        span Following
-                  p
-                    | If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.
-
+              each tempPlace in tempPlaces
+                //- p #{tempPlace}
+                .x_panel.fixed_height_390
+                  .x_content
+                    .flex
+                      ul.list-inline.widget_profile_box
+                        li
+                          a
+                            i.fa.fa-facebook
+                        li
+                          a(href='/tempplaces/#{tempPlace._id}')
+                            img.img-circle.profile_img(src='images/user.png', alt='...')
+                        li
+                          a
+                            i.fa.fa-twitter
+                    h3.name #{tempPlace.user.name}
+                    .flex
+                      ul.list-inline.count2
+                        li
+                        li
+                          h3 #{tempPlace.capacity}
+                          span Capacity
+                        li
+                    p
+                      | #{tempPlace.description}
 block javascript
   script.
