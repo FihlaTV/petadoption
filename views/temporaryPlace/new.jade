@@ -22,7 +22,7 @@ block page
                   | Caregiver 
                   span.required *
                 .col-md-6.col-sm-6.col-xs-12
-                  select.form-control(name="user[_id]")
+                  select.form-control(name="user")
                     option Choose option
                     each user in users
                       option(value="#{user._id}")= user.name
