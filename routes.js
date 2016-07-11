@@ -4,6 +4,7 @@ var organization = require('./controllers/organization')
 var shelter = require('./controllers/shelter')
 var profile = require('./controllers/profile')
 var tempplace = require('./controllers/temporaryPlace')
+var attract = require('./controllers/attract')
 //
 module.exports = function (app, passport) {
   // =====================================
@@ -16,6 +17,12 @@ module.exports = function (app, passport) {
   // app.put('/users/:id', user.update)
   // app.patch('/users/:id', user.patch)
   // app.delete('/users/:id', user.destroy)
+  //
+  // =====================================
+  // Attract =============================
+  // =====================================  
+  //
+  app.post('/attract', isLoggedIn, attract.create)
   //
   // =====================================
   // Shelter =============================

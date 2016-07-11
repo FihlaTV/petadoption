@@ -101,7 +101,7 @@ describe('Attract', () => {
   //   done()
   // })
 
-  it('should add a SINGLE Attract on /attract?orgId=<idOrg> POST', (done) => {
+  it('should add a SINGLE Attract on /attract?orgId=<id> POST', (done) => {
     agent
       .post('/login')
       .send({ email: 'teste@teste.com.br', password: '12345' })
@@ -131,6 +131,7 @@ describe('Attract', () => {
 
         agent
           .post('/attract')
+          // .send({ orgId: org_id })
           .send(attract)
           .then((res) => {
             res.should.have.status(200)
@@ -150,7 +151,7 @@ describe('Attract', () => {
       })
   })
 
-  it('should list ALL Attract on /attract?orgId=<idOrg> GET', (done) => {
+  it('should list ALL Attract on /attract?orgId=<id> GET', (done) => {
     agent
       .post('/login')
       .send({ email: 'teste@teste.com.br', password: '12345' })
