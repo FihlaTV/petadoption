@@ -17,6 +17,7 @@ var attractSchema = new Schema({
     number: {type: String, trim: true, required: false},
     complement: {type: String, trim: true, required: false}
   },
+  description: {type: String, trim: true, required: false},
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
 })
