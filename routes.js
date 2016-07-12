@@ -22,6 +22,7 @@ module.exports = function (app, passport) {
   // Attract =============================
   // =====================================  
   //
+  app.get('/attract', isLoggedIn, attract.index)
   app.post('/attract', isLoggedIn, attract.create)
   //
   // =====================================
