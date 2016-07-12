@@ -57,6 +57,42 @@ var AttractController = {
         console.log(err)
         res.render('error', { error: err })
       })
+  },
+  patch: (req, res) => {
+    Attract.findById(req.params.id, (err, attract) => {
+      if (err)
+        res.render('error', { error: err })
+
+      var op = req.body.op
+      var path = req.body.path.substring(1)
+      var value = req.body.value
+
+      switch (op) {
+        case 'replace':
+          attract[path] = value
+          break
+      /*
+      case 'add':
+        break
+      case 'remove':
+        break
+      case 'move':
+        break
+      case 'copy':
+        break
+      case 'test':
+        break
+      */
+      }
+
+      attract.save(function (err) {
+        if (err)
+          res.render('error', { error: err })
+
+        res.json(attract)
+      // res.json({ message: 'User updated!' })
+      })
+    })
   }
 }
 

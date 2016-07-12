@@ -208,4 +208,49 @@ describe('Attract', () => {
       // throw err
       })
   })
+
+  it('should disable an attract on /attract/<id> PATCH', (done) => {
+    agent
+      .post('/login')
+      .send({ email: 'teste@teste.com.br', password: '12345' })
+      .then((res) => {
+        res.should.have.status(200)
+      })
+      .then((res) => {
+        var address = {
+          country: 'Brazil',
+          state: 'Minas Gerais',
+          city: 'Belo Horizonte',
+          district: 'Funcionários',
+          street: 'Praça da Liberdade',
+          number: '450',
+          complement: ''
+        }
+
+        var attract = new Attract()
+
+        attract.organizationId = org_id
+        attract.name = 'Teste name'
+        attract.email = 'teste@email.com'
+        attract.phones.push('31991101220')
+        attract.category = 'Doação'
+        attract.subcategory = 'Remédios'
+        attract.address  = address
+        attract.description = 'Teste description'
+
+        attract.save((err) => {
+          agent.patch('/attract/' + attract._id)
+            .send({ 'op': 'replace', 'path': '/flActive', 'value': false})
+            .end((error, res) => {
+              res.should.have.status(200)
+              done()
+            })
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        done(err)
+      })
+  })
+
 })
