@@ -160,8 +160,7 @@ describe('Attract', () => {
       })
       .then((res) => {
         agent
-          .get('/attract')
-          .send({ orgId: org_id })
+          .get('/attract?orgId='+org_id)
           .then((res) => {
             res.should.have.status(200)
             done()
