@@ -42,66 +42,6 @@ describe('Attract', () => {
     })
   })
 
-  // beforeEach((done) => {
-
-  //   Promise.try(() => {
-  //     var newOrg = new Organization()
-  //     newOrg.name = 'Org01'
-
-  //     return newOrg.saveAsync()
-  //   }).then((org) => {
-  //     var newUser = new User()
-
-  //     newUser.local.email = 'teste@teste.com.br'
-  //     newUser.local.password = newUser.generateHash('12345')
-  //     newUser.stage = 1
-  //     newUser.organizationId = org_id
-
-  //     newUser.saveAsync()
-
-  //     return ([newUser, org])
-  //   }).then((objs) => {
-  //     user_id = objs[0]._id
-  //     user_email = objs[0].local.email
-
-  //     org_id = objs[1]._id
-
-  //     var address = {
-  //       country: 'Brazil',
-  //       state: 'Minas Gerais',
-  //       city: 'Belo Horizonte',
-  //       district: 'Funcionários',
-  //       street: 'Praça da Liberdade',
-  //       number: '450',
-  //       complement: ''
-  //     }
-
-  //     var user = {
-  //       _id: objs[0]._id
-  //     }
-
-  //     var temporaryPlace = new TemporaryPlace()
-
-  //     temporaryPlace.organizationId = org_id
-  //     temporaryPlace.user = user
-  //     temporaryPlace.description = 'Description'
-  //     temporaryPlace.capacity = 3
-  //     temporaryPlace.address = address
-
-  //     return temporaryPlace.saveAsync()
-  //   }).then((temporaryPlace) => {
-  //     tempplace_id = temporaryPlace._id
-  //     done()
-  //   })
-  // })
-
-  // afterEach((done) => {
-  //   User.collection.drop()
-  //   Organization.collection.drop()
-  //   TemporaryPlace.collection.drop()
-  //   done()
-  // })
-
   after((done) => {
     User.collection.drop()
     Organization.collection.drop()
@@ -205,6 +145,61 @@ describe('Attract', () => {
             // console.log(err)
             done(err)
           // throw err
+          })
+      })
+      .catch((err) => {
+        // console.log(err)
+        done(err)
+      // throw err
+      })
+  })
+
+  it('should update a SINGLE Attract on /attract/<id> PUT', function (done) {
+    agent
+      .post('/login')
+      .send({ email: 'teste@teste.com.br', password: '12345' })
+      .then((res) => {
+        res.should.have.status(200)
+      })
+      .then((res) => {
+        var address = {
+          country: 'Brazil',
+          state: 'Minas Gerais',
+          city: 'Belo Horizonte',
+          district: 'Funcionários',
+          street: 'Praça da Liberdade',
+          number: '450',
+          complement: ''
+        }
+
+        var attract = new Attract()
+
+        attract.organizationId = org_id
+        attract.name = 'Teste name'
+        attract.email = 'teste@email.com'
+        attract.phones.push('31991101220')
+        attract.category = 'Doação'
+        attract.subcategory = 'Remédios'
+        attract.address  = address
+        attract.description = 'Teste description'
+
+        attract.save((err) => {
+
+          attract.flActive = false
+
+          agent
+            .put('/attract/' + attract._id)
+            .send(attract)
+            .then((res) => {
+              res.should.have.status(200)
+              // console.log(res.body)
+              done()
+            })
+            .catch((err) => {
+              // console.log(err)
+              done(err)
+            // throw err
+            })
           })
       })
       .catch((err) => {
