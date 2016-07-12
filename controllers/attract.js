@@ -37,32 +37,27 @@ var AttractController = {
         console.log(err)
         res.render('error', { error: err })
       })
-  }
-/*,
-update: (req, res) => {
-  TemporaryPlace.findById(req.params.id).execAsync()
-    .then((tempPlace) => {
+  },
+  update: (req, res) => {
+    Attract.findById(req.params.id).execAsync()
+      .then((attract) => {
 
-      for (var key in req.body) {
-        tempPlace[key] = req.body[key]
-      }
+        for (var key in req.body) {
+          attract[key] = req.body[key]
+        }
 
-      tempPlace.save((err, tempPlace) => {
-        if (err)
-          throw err
+        attract.save((err, attract) => {
+          if (err)
+            throw err
 
-        User.find({organizationId: tempPlace.organizationId}).execAsync()
-          .then((users) => {
-            res.render('temporaryPlace/show', { userActive: req.user, users: users, tempPlace: tempPlace })
-          })
+          res.render('attract/show', { userActive: req.user, attract: attract })
+        })
       })
-    })
-    .catch((err) => {
-      console.log(err)
-      res.render('error', { error: err })
-    })
-}
-*/
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  }
 }
 
 module.exports = AttractController

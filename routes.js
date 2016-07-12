@@ -25,6 +25,7 @@ module.exports = function (app, passport) {
   app.get('/attract', isLoggedIn, attract.index)
   app.post('/attract', isLoggedIn, attract.create)
   app.get('/attract/:id', isLoggedIn, attract.show)
+  app.put('/attract/:id', isLoggedIn, attract.update)
   //
   // =====================================
   // Shelter =============================
