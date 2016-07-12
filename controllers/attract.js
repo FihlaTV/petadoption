@@ -27,22 +27,18 @@ var AttractController = {
 
       res.json(attract)
     })
+  },
+  show: (req, res) => {
+    Attract.findById(req.params.id).execAsync()
+      .then((attract) => {
+        res.render('attract/show', { userActive: req.user, attract: attract})
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
   }
 /*,
-show: (req, res) => {
-  TemporaryPlace.findById(req.params.id).execAsync()
-    .then((tempPlace) => {
-
-      User.find({organizationId: tempPlace.organizationId}).execAsync()
-        .then((users) => {
-          res.render('temporaryPlace/show', { userActive: req.user, users: users, tempPlace: tempPlace})
-        })
-    })
-    .catch((err) => {
-      console.log(err)
-      res.render('error', { error: err })
-    })
-},
 update: (req, res) => {
   TemporaryPlace.findById(req.params.id).execAsync()
     .then((tempPlace) => {

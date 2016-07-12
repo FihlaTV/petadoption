@@ -20,6 +20,7 @@ describe('Attract', () => {
 
   var user_id
   var org_id
+  var attract_id
 
   before((done) => {
     var newOrg = new Organization()
@@ -101,6 +102,13 @@ describe('Attract', () => {
   //   done()
   // })
 
+  after((done) => {
+    User.collection.drop()
+    Organization.collection.drop()
+    Attract.collection.drop()
+    done()
+  })
+
   it('should add a SINGLE Attract on /attract?orgId=<id> POST', (done) => {
     agent
       .post('/login')
@@ -135,6 +143,7 @@ describe('Attract', () => {
           .send(attract)
           .then((res) => {
             res.should.have.status(200)
+            attract_id = res.body._id
             // console.log(res.body)
             done()
           })
@@ -161,6 +170,33 @@ describe('Attract', () => {
       .then((res) => {
         agent
           .get('/attract?orgId='+org_id)
+          .then((res) => {
+            res.should.have.status(200)
+            done()
+          })
+          .catch((err) => {
+            // console.log(err)
+            done(err)
+          // throw err
+          })
+      })
+      .catch((err) => {
+        // console.log(err)
+        done(err)
+      // throw err
+      })
+  })
+
+  it('should list a SINGLE TemporaryPlace on /attract/<id> GET', (done) => {
+    agent
+      .post('/login')
+      .send({ email: 'teste@teste.com.br', password: '12345' })
+      .then((res) => {
+        res.should.have.status(200)
+      })
+      .then((res) => {
+        agent
+          .get('/attract/' + attract_id)
           .then((res) => {
             res.should.have.status(200)
             done()
