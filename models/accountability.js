@@ -1,13 +1,13 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
-var journalEntriesSchema = new Schema({
+var accountabilitySchema = new Schema({
   organizationId: Schema.Types.ObjectId,
   account: {type: Number, required: false},
   description: {type: String, trim: true, required: false},
   entryDate: {type: Date, default: Date.now},
   entryValue: {type: Number, required: false, get: getCurrency, set: setCurrency},
-  userId: {type: Schema.Types.ObjectId, required: false},
+  userId: {type: Schema.Types.ObjectId, ref: 'User'},
   files: [String],
   createdDate: {type: Date, default: Date.now},
   flActive: {type: Boolean, default: true}
@@ -26,4 +26,4 @@ function setCurrency (v) {
   return v.replace(/[^0-9.]/g, '')
 }
 
-module.exports = mongoose.model('Donation', donationSchema)
+module.exports = mongoose.model('Accountability', accountabilitySchema)
