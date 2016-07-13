@@ -203,5 +203,4 @@ describe('Accountability', () => {
       // throw err
       })
   })
-
 })
