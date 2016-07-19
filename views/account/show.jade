@@ -1,0 +1,24 @@
+extends ../shared/content
+
+block stylesheet
+
+block page
+  div
+    .clearfix
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          //- 
+            .x_title
+              h2
+                | Form validation 
+                small sub title
+              .clearfix
+          .x_content
+            span.section 
+              div
+                |Account
+                //- a.btn.pull-right.btn-primary(type='', href="/attract/new") New
+            p #{account}
+block javascript
+  script.
