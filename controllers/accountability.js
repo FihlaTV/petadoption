@@ -11,6 +11,16 @@ var AccountController = {
         console.log(err)
         res.render('error', { error: err })
       })
+  },
+  show: (req, res) => {
+    Account.findById(req.params.id).execAsync()
+      .then((account) => {
+        res.render('account/show', { userActive: req.user, account: account})
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
   }
 /*
 ,  
@@ -29,16 +39,6 @@ create: (req, res) => {
 
     res.json(attract)
   })
-},
-show: (req, res) => {
-  Attract.findById(req.params.id).execAsync()
-    .then((attract) => {
-      res.render('attract/show', { userActive: req.user, attract: attract})
-    })
-    .catch((err) => {
-      console.log(err)
-      res.render('error', { error: err })
-    })
 },
 update: (req, res) => {
   Attract.findById(req.params.id).execAsync()

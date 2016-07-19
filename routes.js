@@ -24,6 +24,7 @@ module.exports = function (app, passport) {
   // =====================================  
   //
   app.get('/account', isLoggedIn, account.index)
+  app.get('/account/:id', isLoggedIn, account.show)
   //
   // =====================================
   // Attract =============================
