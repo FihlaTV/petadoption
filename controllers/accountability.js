@@ -1,9 +1,9 @@
 var User = require('./../models/user')
-var Account = require('./../models/accountability')
+var Accountability = require('./../models/accountability')
 
 var AccountController = {
   index: (req, res) => {
-    Account.find({organizationId: req.query.orgId}).execAsync()
+    Accountability.find({organizationId: req.query.orgId}).execAsync()
       .then((accounts) => {
         res.render('account/index', { userActive: req.user, accounts: accounts })
       })
@@ -13,7 +13,7 @@ var AccountController = {
       })
   },
   show: (req, res) => {
-    Account.findById(req.params.id).execAsync()
+    Accountability.findById(req.params.id).execAsync()
       .then((account) => {
         res.render('account/show', { userActive: req.user, account: account})
       })
@@ -21,25 +21,23 @@ var AccountController = {
         console.log(err)
         res.render('error', { error: err })
       })
+  },
+  create: (req, res) => {
+    var accountability = new Accountability()
+
+    for (var key in req.body) {
+      accountability[key] = req.body[key]
+    }
+
+    accountability.save((err, accountability) => {
+      if (err)
+        res.render('error', { error: err })
+
+      res.json(accountability)
+    })
   }
 /*
-,  
-create: (req, res) => {
-  var attract = new Attract()
-
-  for (var key in req.body) {
-    attract[key] = req.body[key]
-  }
-
-  // attract.organizationId = req.params.orgId
-
-  attract.save((err, attract) => {
-    if (err)
-      res.render('error', { error: err })
-
-    res.json(attract)
-  })
-},
+,
 update: (req, res) => {
   Attract.findById(req.params.id).execAsync()
     .then((attract) => {
