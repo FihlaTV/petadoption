@@ -36,6 +36,7 @@ describe('Accountability', () => {
       newUser.organizationId = org_id
 
       newUser.save((err) => {
+        user_id = newUser._id
         done()
       })
     })
@@ -44,7 +45,7 @@ describe('Accountability', () => {
   after((done) => {
     User.collection.drop()
     Organization.collection.drop()
-    Accountability.collection.drop()
+    // Accountability.collection.drop()
     done()
   })
 
@@ -56,7 +57,6 @@ describe('Accountability', () => {
         res.should.have.status(200)
       })
       .then((res) => {
-
         var accountability = new Accountability()
         accountability.organizationId = org_id
         accountability.account = 12345
@@ -151,35 +151,26 @@ describe('Accountability', () => {
         res.should.have.status(200)
       })
       .then((res) => {
-        var address = {
-          country: 'Brazil',
-          state: 'Minas Gerais',
-          city: 'Belo Horizonte',
-          district: 'Funcionários',
-          street: 'Praça da Liberdade',
-          number: '450',
-          complement: ''
-        }
-
         var accountability = new Accountability()
         accountability.organizationId = org_id
         accountability.account = 12345
-        accountability.description = 'Description'
+        accountability.description = 'Description1'
         // accountability.entryDate = 
-        accountability.entryValue = 1.00
+        accountability.entryValue = 1
         accountability.userId = user_id
         // accountability.files = 
 
         accountability.save((err) => {
+          if (err)
+            throw err
 
-          accountability.description = 'Description1'
+          accountability.description = 'Description2'
 
           agent
             .put('/account/' + accountability._id)
             .send(accountability)
             .then((res) => {
               res.should.have.status(200)
-              // console.log(res.body)
               done()
             })
             .catch((err) => {
