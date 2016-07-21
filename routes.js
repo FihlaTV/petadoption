@@ -26,6 +26,7 @@ module.exports = function (app, passport) {
   app.get('/account', isLoggedIn, account.index)
   app.post('/account', isLoggedIn, account.create)
   app.get('/account/:id', isLoggedIn, account.show)
+  app.put('/account/:id', isLoggedIn, account.update)
   //
   // =====================================
   // Attract =============================

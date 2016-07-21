@@ -35,29 +35,29 @@ var AccountController = {
 
       res.json(accountability)
     })
+  },
+  update: (req, res) => {
+    Accountability.findById(req.params.id).execAsync()
+      .then((accountability) => {
+
+        for (var key in req.body) {
+          accountability[key] = req.body[key]
+        }
+
+        accountability.save((err, account) => {
+          if (err)
+            throw err
+
+          res.render('account/show', { userActive: req.user, account: account })
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
   }
 /*
 ,
-update: (req, res) => {
-  Attract.findById(req.params.id).execAsync()
-    .then((attract) => {
-
-      for (var key in req.body) {
-        attract[key] = req.body[key]
-      }
-
-      attract.save((err, attract) => {
-        if (err)
-          throw err
-
-        res.render('attract/show', { userActive: req.user, attract: attract })
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-      res.render('error', { error: err })
-    })
-},
 patch: (req, res) => {
   Attract.findById(req.params.id, (err, attract) => {
     if (err)

@@ -23,7 +23,7 @@ function getCurrency (v) {
 }
 
 function setCurrency (v) {
-  return v.replace(/[^0-9.]/g, '')
+  return String(v).replace(/[^0-9.]/g, '')
 }
 
 module.exports = mongoose.model('Accountability', accountabilitySchema)
