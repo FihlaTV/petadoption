@@ -104,6 +104,69 @@ describe('Animal', () => {
       // throw err
       })
   })
+
+  it('should update a SINGLE animal on /animal/<id> PUT', function (done) {
+    agent
+      .post('/login')
+      .send({ email: 'teste@teste.com.br', password: '12345' })
+      .then((res) => {
+        res.should.have.status(200)
+      })
+      .then((res) => {
+        var animal = new Animal()
+        animal.organizationId = org_id
+        animal.name = 'Neko'
+        animal.numberChip = '12345'
+        animal.category = 'cat'
+        animal.breed = 'srd'
+        animal.type = 'tricolor'
+        animal.dateBorn = Date()
+        animal.colors = ['amarelo', 'preto', 'branco']
+        animal.fur = 'médio'
+        animal.size = 'médio'
+        animal.weight = 5
+        animal.height = 3.5
+        animal.length = 25.5
+        animal.neutered = true
+        animal.vaccinated = true
+        animal.vermifugated = true
+        animal.history = 'She was finded in a street'
+        // animal.photos
+        // animal.specitalAdoption
+        animal.gender = 'f'
+        animal.sociable = 3
+        animal.playful = 4
+        animal.affectionate = 5
+        // animal.temporaryPlace    
+        // animal.shelter._id = 
+
+        animal.save((err) => {
+          if (err)
+            throw err
+
+          animal.name = 'Neko II'
+
+          agent
+            .put('/animal/' + animal._id)
+            .send(animal)
+            .then((res) => {
+              res.should.have.status(200)
+              done()
+            })
+            .catch((err) => {
+              // console.log(err)
+              done(err)
+            // throw err
+            })
+        })
+      })
+      .catch((err) => {
+        // console.log(err)
+        done(err)
+      // throw err
+      })
+  })
+
 /*
   it('should list ALL accountability on /account?orgId=<id> GET', (done) => {
     agent
@@ -160,48 +223,5 @@ describe('Animal', () => {
       })
   })
 
-  it('should update a SINGLE accountability on /account/<id> PUT', function (done) {
-    agent
-      .post('/login')
-      .send({ email: 'teste@teste.com.br', password: '12345' })
-      .then((res) => {
-        res.should.have.status(200)
-      })
-      .then((res) => {
-        var accountability = new Accountability()
-        accountability.organizationId = org_id
-        accountability.account = 12345
-        accountability.description = 'Description1'
-        // accountability.entryDate = 
-        accountability.entryValue = 1
-        accountability.userId = user_id
-        // accountability.files = 
-
-        accountability.save((err) => {
-          if (err)
-            throw err
-
-          accountability.description = 'Description2'
-
-          agent
-            .put('/account/' + accountability._id)
-            .send(accountability)
-            .then((res) => {
-              res.should.have.status(200)
-              done()
-            })
-            .catch((err) => {
-              // console.log(err)
-              done(err)
-            // throw err
-            })
-        })
-      })
-      .catch((err) => {
-        // console.log(err)
-        done(err)
-      // throw err
-      })
-  })
 */
 })

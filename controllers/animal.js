@@ -16,6 +16,27 @@ var AnimalController = {
     })
   },
 
+  update: function (req, res) {
+    Animal.findById(req.params.id).execAsync()
+      .then((animal) => {
+
+        for (var key in req.body) {
+          animal[key] = req.body[key]
+        }
+
+        animal.save((err, animal) => {
+          if (err)
+            throw err
+
+          res.render('animal/show', { userActive: req.user, animal: animal })
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  },
+
 /*
 index: function (req, res) {
   Animal.find({}, function (err, user) {
@@ -32,20 +53,6 @@ show: function (req, res) {
       res({err: 'Não foi possível retornar os dados do animal!'})
     else
       res(user)
-  })
-},
-
-update: function (req, res) {
-  Animal.findById(req.params.id, function (err, user) {
-    if (err)
-      res({err: 'Não foi possível retornar os dados do animal!'})
-
-    animal.save(function (err, user) {
-      if (error)
-        callback({error: 'Não foi possível atualizar o usuário!'})
-      else
-        callback(user)
-    })
   })
 },
 
