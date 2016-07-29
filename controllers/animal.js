@@ -37,25 +37,29 @@ var AnimalController = {
       })
   },
 
+  show: function (req, res) {
+    Animal.findById(req.params.id).execAsync()
+      .then((animal) => {
+        res.render('animal/show', { userActive: req.user, animal: animal})
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  },
+
+  index: (req, res) => {
+    Animal.find({organizationId: req.query.orgId}).execAsync()
+      .then((animals) => {
+        res.render('animal/index', { userActive: req.user, animals: animals })
+      })
+      .catch((err) => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
+  },
+
 /*
-index: function (req, res) {
-  Animal.find({}, function (err, user) {
-    if (err)
-      res({err: 'Não foi possível retornar os dados do animal!'})
-    else
-      res.render('animal/index', { animals: animal })
-  })
-},
-
-show: function (req, res) {
-  Animal.findById(req.params.id, function (err, user) {
-    if (err)
-      res({err: 'Não foi possível retornar os dados do animal!'})
-    else
-      res(user)
-  })
-},
-
 patch: function (req, res) {
   Animal.find({}, function (err, user) {
     if (err)
