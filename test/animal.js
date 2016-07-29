@@ -19,7 +19,7 @@ describe('Animal', () => {
 
   var user_id
   var org_id
-  var account_id
+  var animal_id
 
   before((done) => {
     var newOrg = new Organization()
@@ -144,6 +144,8 @@ describe('Animal', () => {
           if (err)
             throw err
 
+          animal_id = animal._id
+
           animal.name = 'Neko II'
 
           agent
@@ -167,8 +169,7 @@ describe('Animal', () => {
       })
   })
 
-/*
-  it('should list ALL accountability on /account?orgId=<id> GET', (done) => {
+  it('should list a SINGLE animal on /animal/<id> GET', (done) => {
     agent
       .post('/login')
       .send({ email: 'teste@teste.com.br', password: '12345' })
@@ -177,7 +178,34 @@ describe('Animal', () => {
       })
       .then((res) => {
         agent
-          .get('/account')
+          .get('/animal/' + animal_id)
+          .then((res) => {
+            res.should.have.status(200)
+            done()
+          })
+          .catch((err) => {
+            // console.log(err)
+            done(err)
+          // throw err
+          })
+      })
+      .catch((err) => {
+        // console.log(err)
+        done(err)
+      // throw err
+      })
+  })
+
+  it('should list ALL animal on /animal?orgId=<id> GET', (done) => {
+    agent
+      .post('/login')
+      .send({ email: 'teste@teste.com.br', password: '12345' })
+      .then((res) => {
+        res.should.have.status(200)
+      })
+      .then((res) => {
+        agent
+          .get('/animal')
           .send({ orgId: org_id })
           .then((res) => {
             res.should.have.status(200)
@@ -195,33 +223,4 @@ describe('Animal', () => {
       // throw err
       })
   })
-
-  it('should list a SINGLE accountability on /account/<id> GET', (done) => {
-    agent
-      .post('/login')
-      .send({ email: 'teste@teste.com.br', password: '12345' })
-      .then((res) => {
-        res.should.have.status(200)
-      })
-      .then((res) => {
-        agent
-          .get('/account/' + account_id)
-          .then((res) => {
-            res.should.have.status(200)
-            done()
-          })
-          .catch((err) => {
-            // console.log(err)
-            done(err)
-          // throw err
-          })
-      })
-      .catch((err) => {
-        // console.log(err)
-        done(err)
-      // throw err
-      })
-  })
-
-*/
 })
