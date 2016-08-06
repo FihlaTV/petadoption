@@ -6,8 +6,8 @@ var UserController = {
       if (err)
         res.render('error', { error: err })
 
-      res.json(users)
-    // res.render('users/index', { users: users })
+      // res.json(users)
+      res.render('users/index', { users: users })
     })
   },
   show: function (req, res) {
