@@ -7,7 +7,7 @@ var UserController = {
         res.render('error', { error: err })
 
       // res.json(users)
-      res.render('users/index', { users: users })
+      res.render('user/index', { userActive: req.user, users: users })
     })
   },
   show: function (req, res) {
