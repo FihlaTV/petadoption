@@ -67,7 +67,7 @@ describe('Accountability', () => {
         // accountability.files = 
 
         agent
-          .post('/account')
+          .post('/accounts')
           .send(accountability)
           .then((res) => {
             res.should.have.status(200)
@@ -97,7 +97,7 @@ describe('Accountability', () => {
       })
       .then((res) => {
         agent
-          .get('/account')
+          .get('/accounts')
           .send({ orgId: org_id })
           .then((res) => {
             res.should.have.status(200)
@@ -125,7 +125,7 @@ describe('Accountability', () => {
       })
       .then((res) => {
         agent
-          .get('/account/' + account_id)
+          .get('/accounts/' + account_id)
           .then((res) => {
             res.should.have.status(200)
             done()
@@ -167,7 +167,7 @@ describe('Accountability', () => {
           accountability.description = 'Description2'
 
           agent
-            .put('/account/' + accountability._id)
+            .put('/accounts/' + accountability._id)
             .send(accountability)
             .then((res) => {
               res.should.have.status(200)

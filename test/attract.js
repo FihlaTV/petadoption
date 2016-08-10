@@ -78,7 +78,7 @@ describe('Attract', () => {
         attract.description = 'Teste description'
 
         agent
-          .post('/attract')
+          .post('/attracts')
           // .send({ orgId: org_id })
           .send(attract)
           .then((res) => {
@@ -109,7 +109,7 @@ describe('Attract', () => {
       })
       .then((res) => {
         agent
-          .get('/attract?orgId='+org_id)
+          .get('/attracts?orgId=' + org_id)
           .then((res) => {
             res.should.have.status(200)
             done()
@@ -136,7 +136,7 @@ describe('Attract', () => {
       })
       .then((res) => {
         agent
-          .get('/attract/' + attract_id)
+          .get('/attracts/' + attract_id)
           .then((res) => {
             res.should.have.status(200)
             done()
@@ -180,7 +180,7 @@ describe('Attract', () => {
         attract.phones.push('31991101220')
         attract.category = 'Doação'
         attract.subcategory = 'Remédios'
-        attract.address  = address
+        attract.address = address
         attract.description = 'Teste description'
 
         attract.save((err) => {
@@ -188,7 +188,7 @@ describe('Attract', () => {
           attract.flActive = false
 
           agent
-            .put('/attract/' + attract._id)
+            .put('/attracts/' + attract._id)
             .send(attract)
             .then((res) => {
               res.should.have.status(200)
@@ -200,7 +200,7 @@ describe('Attract', () => {
               done(err)
             // throw err
             })
-          })
+        })
       })
       .catch((err) => {
         // console.log(err)
@@ -235,11 +235,11 @@ describe('Attract', () => {
         attract.phones.push('31991101220')
         attract.category = 'Doação'
         attract.subcategory = 'Remédios'
-        attract.address  = address
+        attract.address = address
         attract.description = 'Teste description'
 
         attract.save((err) => {
-          agent.patch('/attract/' + attract._id)
+          agent.patch('/attracts/' + attract._id)
             .send({ 'op': 'replace', 'path': '/flActive', 'value': false})
             .end((error, res) => {
               res.should.have.status(200)
@@ -252,5 +252,4 @@ describe('Attract', () => {
         done(err)
       })
   })
-
 })

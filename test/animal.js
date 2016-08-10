@@ -86,7 +86,7 @@ describe('Animal', () => {
         // animal.shelter._id = 
 
         agent
-          .post('/animal')
+          .post('/animals')
           .send(animal)
           .then((res) => {
             res.should.have.status(200)
@@ -149,7 +149,7 @@ describe('Animal', () => {
           animal.name = 'Neko II'
 
           agent
-            .put('/animal/' + animal._id)
+            .put('/animals/' + animal._id)
             .send(animal)
             .then((res) => {
               res.should.have.status(200)
@@ -178,7 +178,7 @@ describe('Animal', () => {
       })
       .then((res) => {
         agent
-          .get('/animal/' + animal_id)
+          .get('/animals/' + animal_id)
           .then((res) => {
             res.should.have.status(200)
             done()
@@ -205,7 +205,7 @@ describe('Animal', () => {
       })
       .then((res) => {
         agent
-          .get('/animal')
+          .get('/animals')
           .send({ orgId: org_id })
           .then((res) => {
             res.should.have.status(200)
