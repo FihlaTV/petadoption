@@ -24,29 +24,29 @@ module.exports = function (app, passport) {
   // Animal ==============================
   // =====================================  
   //
-  app.post('/animal', isLoggedIn, animal.create)
-  app.put('/animal/:id', isLoggedIn, animal.update)
-  app.get('/animal/:id', isLoggedIn, animal.show)
-  app.get('/animal', isLoggedIn, animal.index)
+  app.post('/animals', isLoggedIn, animal.create)
+  app.put('/animals/:id', isLoggedIn, animal.update)
+  app.get('/animals/:id', isLoggedIn, animal.show)
+  app.get('/animals', isLoggedIn, animal.index)
   //
   // =====================================
   // Attract =============================
   // =====================================  
   //
-  app.get('/account', isLoggedIn, account.index)
-  app.post('/account', isLoggedIn, account.create)
-  app.get('/account/:id', isLoggedIn, account.show)
-  app.put('/account/:id', isLoggedIn, account.update)
+  app.get('/accounts', isLoggedIn, account.index)
+  app.post('/accounts', isLoggedIn, account.create)
+  app.get('/accounts/:id', isLoggedIn, account.show)
+  app.put('/accounts/:id', isLoggedIn, account.update)
   //
   // =====================================
   // Attract =============================
   // =====================================  
   //
-  app.get('/attract', isLoggedIn, attract.index)
-  app.post('/attract', isLoggedIn, attract.create)
-  app.get('/attract/:id', isLoggedIn, attract.show)
-  app.put('/attract/:id', isLoggedIn, attract.update)
-  app.patch('/attract/:id', isLoggedIn, attract.patch)
+  app.get('/attracts', isLoggedIn, attract.index)
+  app.post('/attracts', isLoggedIn, attract.create)
+  app.get('/attracts/:id', isLoggedIn, attract.show)
+  app.put('/attracts/:id', isLoggedIn, attract.update)
+  app.patch('/attracts/:id', isLoggedIn, attract.patch)
   //
   // =====================================
   // Shelter =============================
