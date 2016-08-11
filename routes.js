@@ -7,8 +7,10 @@ var tempplace = require('./controllers/temporaryPlace')
 var attract = require('./controllers/attract')
 var account = require('./controllers/accountability')
 var animal = require('./controllers/animal')
+var site = require('./controllers/site')
 //
 module.exports = function (app, passport) {
+  // 
   // =====================================
   // Dashboard ===========================
   // =====================================
@@ -19,6 +21,15 @@ module.exports = function (app, passport) {
   // app.put('/users/:id', user.update)
   // app.patch('/users/:id', user.patch)
   // app.delete('/users/:id', user.destroy)
+  //
+  // =====================================
+  // Site ================================
+  // =====================================  
+  //
+  app.post('/sites', isLoggedIn, site.create)
+  app.put('/sites/:id', isLoggedIn, site.update)
+  app.get('/sites/:id', isLoggedIn, site.show)
+  app.get('/sites', isLoggedIn, site.index)
   //
   // =====================================
   // Animal ==============================
@@ -84,18 +95,6 @@ module.exports = function (app, passport) {
   app.put('/users/:id', isLoggedIn, user.update)
   app.patch('/users/:id', isLoggedIn, user.patch)
   app.delete('/users/:id', isLoggedIn, user.destroy)
-
-  // =====================================
-  // Animal ==============================
-  // =====================================
-  //
-  // app.get('/animal', animal.index)
-  // app.get('/animal/:id', animal.show)
-  // app.post('/animal', animal.create)
-  // app.put('/animal/:id', animal.update)
-  // app.patch('/animal/:id', animal.patch)
-  // app.delete('/animal/:id', animal.destroy)
-
   //
   // =====================================
   // HOME PAGE (with login links) ========
