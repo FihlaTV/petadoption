@@ -4,22 +4,216 @@ block stylesheet
 
 block page
   div
+    .page-title
+      .title_left
+        h3
+          | Animals 
+          //- small  gallery design
+      .title_right
+        .col-md-5.col-sm-5.col-xs-12.form-group.pull-right.top_search
+          .input-group
+            input.form-control(type='text', placeholder='Search for...')
+            span.input-group-btn
+              button.btn.btn-default(type='button') Go!
     .clearfix
     .row
-      .col-md-12.col-sm-12.col-xs-12
+      .col-md-12
         .x_panel
-          //- 
-            .x_title
-              h2
-                | Form validation 
-                small sub title
-              .clearfix
+          //- .x_title
+          //-   h2
+          //-     | Media Gallery 
+          //-     small  gallery design 
+          //-   ul.nav.navbar-right.panel_toolbox
+          //-     li
+          //-       a.collapse-link
+          //-         i.fa.fa-chevron-up
+          //-     li.dropdown
+          //-       a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+          //-         i.fa.fa-wrench
+          //-       ul.dropdown-menu(role='menu')
+          //-         li
+          //-           a(href='#') Settings 1
+          //-         li
+          //-           a(href='#') Settings 2
+          //-     li
+          //-       a.close-link
+          //-         i.fa.fa-close
+          //-   .clearfix
           .x_content
-            span.section 
-              div
-                |Attraction
-                //- a.btn.pull-right.btn-primary(type='', href="/attract/new") New
-            each animal in animals
-              p #{animal}
+            .row
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask
+                      p Your Text
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p Snow and Ice Incoming for the South
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask
+                      p Your Text
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p Snow and Ice Incoming for the South
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask
+                      p Your Text
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p Snow and Ice Incoming for the South
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask
+                      p Your Text
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p Snow and Ice Incoming for the South
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask
+                      p Your Text
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p Snow and Ice Incoming for the South
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask.no-caption
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p
+                      strong Image Name
+                    p Snow and Ice Incoming
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask.no-caption
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p
+                      strong Image Name
+                    p Snow and Ice Incoming
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask.no-caption
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p
+                      strong Image Name
+                    p Snow and Ice Incoming
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask.no-caption
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p
+                      strong Image Name
+                    p Snow and Ice Incoming
+              .col-md-55
+                .thumbnail
+                  .image.view.view-first
+                    img(style='width: 100%; display: block;', src='images/4.jpg', alt='image')
+                    .mask.no-caption
+                      .tools.tools-bottom
+                        a(href='#')
+                          i.fa.fa-link
+                        a(href='#')
+                          i.fa.fa-pencil
+                        a(href='#')
+                          i.fa.fa-times
+                  .caption
+                    p
+                      strong Image Name
+                    p Snow and Ice Incoming
+  //- 
+    div
+      .clearfix
+      .row
+        .col-md-12.col-sm-12.col-xs-12
+          .x_panel
+            //- 
+              .x_title
+                h2
+                  | Form validation 
+                  small sub title
+                .clearfix
+            .x_content
+              span.section 
+                div
+                  |Animals
+                  //- a.btn.pull-right.btn-primary(type='', href="/attract/new") New
+              each animal in animals
+                p #{animal}
 block javascript
   script.
